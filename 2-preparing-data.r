@@ -17,11 +17,11 @@ setwd("./")
 
 # Load the data into a data frame with columns and rows
 origData <- read.csv2(
-  './Jan_2015_ontime.csv',    # The filepath
-  sep=",",                    # The delimiter is a comma
-  header=TRUE,                # The csv file contains headers
-  stringsAsFactors=FALSE      # Setting to TRUE would take up a lot of memory
-                              # This is an optimization left for later stages in the ml workflow
+  './Jan_2015_ontime.csv',    # The filepath.
+  sep=",",                    # The delimiter is a comma.
+  header=TRUE,                # The csv file contains headers.
+  stringsAsFactors=FALSE      # This is an optimization left for later stages
+                              # in the ml workflow.
 )
 
 # To speed thing up let's restrict data to only
@@ -88,7 +88,14 @@ head(origData,10)
 #
 # Let's Check the values using correlation function, cor().  Closer to 1 =>  more correlated
 cor(origData[c("ORIGIN_AIRPORT_SEQ_ID", "ORIGIN_AIRPORT_ID")])
-# Wow.  A perfect 1. So ORIGIN_AIRPORT_SEQ_ID and ORIGIN_AIRPORT_ID are moving in lock step.
+
+#                          ORIGIN_AIRPORT_ID ORIGIN_AIRPORT_SEQ_ID
+# ORIGIN_AIRPORT_ID            1                     1
+# ORIGIN_AIRPORT_SEQ_ID        1                     1
+#
+# Wow.  A perfect 1. So ORIGIN_AIRPORT_SEQ_ID and
+# ORIGIN_AIRPORT_ID are moving in lock step.
+
 # Let's check DEST_AIRPORT_SEQ_ID, DEST_AIRPORT_ID
 cor(origData[c("DEST_AIRPORT_SEQ_ID", "DEST_AIRPORT_ID")])
 # Another perfect 1.  So DEST_AIRPORT_SEQ_ID and DEST_AIRPORT_SEQ_ID are also moving in lock step.
@@ -162,13 +169,18 @@ onTimeData$ORIGIN <- as.factor(onTimeData$ORIGIN)
 onTimeData$DEP_TIME_BLK <- as.factor(onTimeData$DEP_TIME_BLK)
 onTimeData$CARRIER <- as.factor(onTimeData$CARRIER)
 
-# Accurately predicting rare events is difficult.
-# We need to check the distribution of values to ensure
-# our cleaned data will allow us to make a prediction.
+# Accurately predicting rare events is difficult!
+# So before we can use our cleaned data to train a prediction
+# we need to ensure the distribution of the data will allow
+# us to train a prediction.
 #
-# Let's see how many delayed vs. non-delayed results
-# occur in the data:
-tapply(onTimeData$ARR_DEL15, onTimeData$ARR_DEL15, length)
+# Use tapply() to see how many times a boolean value is
+# TRUE and how many times it is FALSE:
+tapply(
+  onTimeData$ARR_DEL15,
+  onTimeData$ARR_DEL15, length)
+
+# Now let's compute the prevelance of delayed flights in the data:
 (6460 / (25664 + 6460)) # Approx 20% of our values are TRUE. That should be enough.
 (7656 / (29468 + 7656)) #  0.2062278 of our values are TRUE. That should be enough.
 
