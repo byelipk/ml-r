@@ -159,15 +159,15 @@ onTimeData$DIVERTED  <- as.integer(onTimeData$DIVERTED)
 # is likely to be high, then the field should probably not
 # be turned into a factor. Boolean columns are good candidates to
 # be transformed into factors.
-onTimeData$ARR_DEL15 <- as.factor(onTimeData$ARR_DEL15)
-onTimeData$DEP_DEL15 <- as.factor(onTimeData$DEP_DEL15)
-onTimeData$DEST_AIRPORT_ID <- as.factor(onTimeData$DEST_AIRPORT_ID)
+onTimeData$ARR_DEL15         <- as.factor(onTimeData$ARR_DEL15)
+onTimeData$DEP_DEL15         <- as.factor(onTimeData$DEP_DEL15)
+onTimeData$DEST_AIRPORT_ID   <- as.factor(onTimeData$DEST_AIRPORT_ID)
 onTimeData$ORIGIN_AIRPORT_ID <- as.factor(onTimeData$ORIGIN_AIRPORT_ID)
-onTimeData$DAY_OF_WEEK <- as.factor(onTimeData$DAY_OF_WEEK)
-onTimeData$DEST <- as.factor(onTimeData$DEST)
-onTimeData$ORIGIN <- as.factor(onTimeData$ORIGIN)
-onTimeData$DEP_TIME_BLK <- as.factor(onTimeData$DEP_TIME_BLK)
-onTimeData$CARRIER <- as.factor(onTimeData$CARRIER)
+onTimeData$DAY_OF_WEEK.      <- as.factor(onTimeData$DAY_OF_WEEK)
+onTimeData$DEST              <- as.factor(onTimeData$DEST)
+onTimeData$ORIGIN            <- as.factor(onTimeData$ORIGIN)
+onTimeData$DEP_TIME_BLK      <- as.factor(onTimeData$DEP_TIME_BLK)
+onTimeData$CARRIER           <- as.factor(onTimeData$CARRIER)
 
 # Accurately predicting rare events is difficult!
 # So before we can use our cleaned data to train a prediction
